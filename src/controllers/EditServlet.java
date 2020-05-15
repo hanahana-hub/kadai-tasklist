@@ -39,9 +39,12 @@ public class EditServlet extends HttpServlet {
 
         em.close();
 
+        //タスクの情報とセッションIDをリクエストスコープに登録
+        request.setAttribute("task", t);
+        request.setAttribute("_token", request.getSession().getId());
+
         //タスクのIDをセッションスコープに登録
         request.getSession().setAttribute("task_id", t.getId());
-        request.setAttribute("_token", request.getSession().getId());
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/edit.jsp");
         rd.forward(request, response);
